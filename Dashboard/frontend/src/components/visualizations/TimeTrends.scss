@@ -1,0 +1,166 @@
+.time-trends {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+        margin: 0 0 2rem;
+        padding-left: 1rem;
+        border-left: 4px solid #3498db;
+        color: #2c3e50;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .chart-container {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    }
+
+    .summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+
+        .summary-item {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            h3 {
+                margin: 0 0 1rem;
+                color: #2c3e50;
+                font-size: 1.2rem;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                &::before {
+                    content: '📈';
+                    font-size: 1.2rem;
+                }
+            }
+        }
+    }
+
+    .analysis-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+
+        .analysis-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            h3 {
+                margin: 0 0 1rem;
+                color: #2c3e50;
+                font-size: 1.2rem;
+                font-weight: 600;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                &::before {
+                    content: '🔄';
+                    font-size: 1.2rem;
+                }
+            }
+
+            .transitions-list, .segments-list {
+                display: flex;
+                flex-direction: column;
+                gap: 0.75rem;
+
+                .transition-item, .segment-item {
+                    background: white;
+                    padding: 0.75rem;
+                    border-radius: 6px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    font-size: 0.9rem;
+                    transition: background-color 0.2s ease;
+
+                    &:hover {
+                        background: #f1f8ff;
+                    }
+
+                    .time {
+                        color: #7f8c8d;
+                        font-weight: 500;
+                    }
+
+                    .transition {
+                        color: #2c3e50;
+                        font-weight: 600;
+                    }
+
+                    .duration {
+                        color: #7f8c8d;
+                        font-size: 0.85rem;
+                    }
+
+                    .change {
+                        color: #2ecc71;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .custom-tooltip {
+        background: white;
+        padding: 1rem;
+        border-radius: 6px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+        p {
+            margin: 0.25rem 0;
+            font-size: 0.9rem;
+            color: #2c3e50;
+
+            &.time {
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+                color: #3498db;
+            }
+
+            &.emotion {
+                font-weight: 600;
+                margin-bottom: 0.5rem;
+            }
+        }
+    }
+} 

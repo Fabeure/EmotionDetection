@@ -1,0 +1,208 @@
+.raw-logs {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px 0;
+
+    .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 6px;
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 200px;
+
+            label {
+                font-weight: 500;
+                color: #495057;
+                white-space: nowrap;
+            }
+
+            select {
+                padding: 8px 12px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                background-color: white;
+                font-size: 14px;
+                color: #495057;
+                cursor: pointer;
+                transition: border-color 0.2s;
+                min-width: 150px;
+
+                &:hover {
+                    border-color: #3498db;
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: #3498db;
+                    box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+                }
+            }
+        }
+    }
+
+    .summary {
+        margin-bottom: 20px;
+        padding: 10px 15px;
+        background: #e9ecef;
+        border-radius: 4px;
+
+        p {
+            margin: 5px 0;
+            color: #495057;
+            font-size: 14px;
+
+            &.active-filters {
+                color: #3498db;
+                font-weight: 500;
+            }
+
+            &.grouping-info {
+                color: #2ecc71;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+
+                &::before {
+                    content: '📊';
+                }
+            }
+        }
+    }
+
+    .table-container {
+        overflow-x: auto;
+        margin: 0 -20px;
+        padding: 0 20px;
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+
+            th, td {
+                padding: 12px 15px;
+                text-align: left;
+                border-bottom: 1px solid #e9ecef;
+            }
+
+            th {
+                background-color: #f8f9fa;
+                font-weight: 600;
+                color: #495057;
+                cursor: pointer;
+                user-select: none;
+                white-space: nowrap;
+                position: sticky;
+                top: 0;
+                z-index: 1;
+
+                &:hover {
+                    background-color: #e9ecef;
+                }
+            }
+
+            td {
+                color: #212529;
+                white-space: nowrap;
+            }
+
+            tbody tr {
+                transition: background-color 0.2s;
+
+                &:hover {
+                    background-color: #f8f9fa;
+                }
+
+                &.group-header {
+                    background-color: #f1f8ff;
+                    font-weight: 500;
+
+                    td {
+                        color: #3498db;
+                    }
+                }
+            }
+        }
+    }
+
+    .pagination {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+        padding: 15px;
+        background: #f8f9fa;
+        border-radius: 6px;
+
+        .page-info {
+            font-size: 14px;
+            color: #495057;
+            font-weight: 500;
+        }
+
+        button {
+            text-transform: none;
+            font-weight: 500;
+            
+            &:disabled {
+                opacity: 0.5;
+            }
+        }
+    }
+}
+
+.valenceBar,
+.arousalBar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 150px;
+
+    .valueLabel {
+        width: 40px;
+        text-align: right;
+        margin-right: 8px;
+        font-size: 0.8rem;
+    }
+
+    .track {
+        flex: 1;
+        height: 8px;
+        border-radius: 4px;
+        position: relative;
+
+        .thumb {
+            position: absolute;
+            top: -4px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: white;
+            border: 2px solid #3f51b5;
+            transform: translateX(-50%);
+            transition: left 0.3s ease;
+        }
+    }
+}
+
+.confidencePill {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    border: 1px solid;
+    transition: all 0.3s ease;
+}
