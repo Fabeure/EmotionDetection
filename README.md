@@ -100,6 +100,8 @@ Emotion Tracker is a comprehensive, end-to-end solution for capturing, analyzing
 
 A comprehensive Unity toolkit that transforms emotion detection into a plug-and-play gameplay layer. This plugin provides real-time emotion processing, multi-modal stimulus detection, and flexible logging capabilities.
 
+**GitHub Repository**: [AyyyCn/EmotionDriven](https://github.com/AyyyCn/EmotionDriven)
+
 #### Key Features
 
 - **Real-time Emotion Processing**: Configurable confidence thresholds and emotion mapping
@@ -159,6 +161,8 @@ Editor/
 **Location**: `Model/`
 
 A Python-based emotion detection system using TensorFlow Lite and MediaPipe for real-time facial emotion recognition. This component processes video feeds and streams emotion data to the Unity plugin.
+
+**GitHub Repository**: [Hama26/emotion_detection](https://github.com/Hama26/emotion_detection)
 
 #### Key Features
 
