@@ -23,138 +23,196 @@
 
 # Emotion Tracker Backend
 
-This is the backend service for the Emotion Tracker application. It provides user authentication and session management for emotion tracking data.
+A NestJS-based backend service for the Emotion Tracker application. This service provides authentication, session management, and data storage for emotion tracking data collected from Unity experiences and processed by the emotion detection model.
+
+## Overview
+
+This backend is part of a larger emotion-driven analytics system that includes:
+- **Unity Plugin**: Collects emotion data and stimuli from Unity experiences
+- **Model**: Python-based emotion detection using machine learning
+- **Frontend**: React dashboard for visualizing emotion analytics
+- **Backend**: This service - handles data storage, authentication, and API endpoints
+
+## Features
+
+- **Authentication**: JWT-based user authentication and authorization
+- **Session Management**: Store and retrieve emotion tracking sessions
+- **User Management**: User registration, login, and profile management
+- **Trackable Objects**: Manage stimuli and objects that trigger emotional responses
+- **RESTful API**: Comprehensive API for frontend integration
+- **MongoDB Integration**: Scalable data storage for session and user data
 
 ## Prerequisites
 
-- Node.js (v14 or higher)
+- Node.js (v16 or higher)
 - MongoDB (running locally or accessible via URL)
-- npm (Node package manager)
+- npm or yarn package manager
 
-## Setup
+## Quick Start
 
-1. Install dependencies:
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-```bash
-npm install
-```
+2. **Environment Configuration:**
+   Create a `.env` file in the root directory:
+   ```env
+   PORT=3000
+   MONGODB_URI=mongodb://localhost:27017/emotion-tracker
+   JWT_SECRET=your-super-secret-key-change-this-in-production
+   JWT_EXPIRES_IN=1d
+   ```
 
-2. Create a `.env` file in the root directory with the following variables:
+3. **Start MongoDB:**
+   ```bash
+   # If running locally
+   mongod
+   ```
 
-```
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017/emotion-tracker
-JWT_SECRET=your-super-secret-key-change-this-in-production
-JWT_EXPIRES_IN=1d
-```
-
-3. Start MongoDB if running locally:
-
-```bash
-mongod
-```
-
-4. Start the development server:
-
-```bash
-npm run start:dev
-```
+4. **Run the development server:**
+   ```bash
+   npm run start:dev
+   ```
 
 The API will be available at `http://localhost:3000`
 
 ## API Documentation
 
-Once the server is running, you can access:
+- **Interactive API Documentation (Swagger UI)**: `http://localhost:3000/api`
+- **API Base URL**: `http://localhost:3000`
 
-- Interactive API documentation (Swagger UI): `http://localhost:3000/api`
+## Core Modules
+
+### Authentication (`/auth`)
+- User registration and login
+- JWT token generation and validation
+- Password hashing and security
+
+### Sessions (`/sessions`)
+- Upload emotion tracking session data
+- Retrieve session history
+- Session analytics and metadata
+
+### Users (`/users`)
+- User profile management
+- User data schemas and validation
+
+### Trackable Objects (`/trackable-objects`)
+- Manage stimuli and objects that trigger emotions
+- Category management for different types of stimuli
 
 ## API Endpoints
 
 ### Authentication
-
-- POST `/auth/register` - Register a new user
-  ```json
-  {
-    "email": "user@example.com",
-    "username": "username",
-    "password": "password"
-  }
-  ```
-- POST `/auth/login` - Login and get access token
-  ```json
-  {
-    "email": "user@example.com",
-    "password": "password"
-  }
-  ```
+- `POST /auth/register` - Register a new user
+- `POST /auth/login` - Login and get access token
 
 ### Sessions
+- `POST /sessions/upload` - Upload session data (requires auth)
+- `GET /sessions` - Get user's sessions (requires auth)
+- `GET /sessions/:id` - Get specific session (requires auth)
 
-- POST `/sessions/upload` - Upload a new session file (requires authentication)
-  - Content-Type: multipart/form-data
-  - Body: file (JSONL format)
-- GET `/sessions` - Get all sessions for the current user (requires authentication)
-- GET `/sessions/:id` - Get a specific session by ID (requires authentication)
+### Trackable Objects
+- `GET /trackable-objects` - Get all trackable objects
+- `POST /trackable-objects` - Create new trackable object
+- `PUT /trackable-objects/:id` - Update trackable object
+- `DELETE /trackable-objects/:id` - Delete trackable object
+
+## Project Structure
+
+```
+src/
+├── auth/                 # Authentication module
+│   ├── auth.controller.ts
+│   ├── auth.module.ts
+│   ├── auth.service.ts
+│   ├── jwt-auth.guard.ts
+│   ├── jwt.strategy.ts
+│   ├── local-auth.guard.ts
+│   └── local.strategy.ts
+├── sessions/            # Session management
+│   ├── schemas/
+│   │   └── session.schema.ts
+│   ├── sessions.controller.ts
+│   ├── sessions.module.ts
+│   └── sessions.service.ts
+├── trackable-objects/   # Stimuli management
+│   ├── schemas/
+│   │   └── trackable-object.schema.ts
+│   ├── trackable-objects.controller.ts
+│   ├── trackable-objects.module.ts
+│   └── trackable-objects.service.ts
+├── users/              # User management
+│   └── schemas/
+│       └── user.schema.ts
+├── config/             # Configuration
+│   └── configuration.ts
+├── app.controller.ts   # Main controller
+├── app.module.ts       # Root module
+├── app.service.ts      # Main service
+└── main.ts            # Application entry point
+```
 
 ## Development
 
-The project structure is organized as follows:
+### Available Scripts
+- `npm run start:dev` - Start development server with hot reload
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run test` - Run unit tests
+- `npm run test:e2e` - Run end-to-end tests
+- `npm run test:cov` - Run tests with coverage
 
-```
-backend/
-├── src/
-│   ├── auth/           # Authentication module
-│   ├── sessions/       # Sessions module
-│   ├── users/          # User schemas
-│   ├── config/         # Configuration
-│   └── main.ts         # Application entry point
-├── test/              # Test files
-└── package.json       # Project dependencies
-```
+### Code Style
+- ESLint configuration for code quality
+- TypeScript for type safety
+- NestJS decorators and patterns
 
 ## Testing
 
-Run the test suite:
-
 ```bash
+# Unit tests
 npm run test
-```
 
-Run e2e tests:
-
-```bash
+# E2E tests
 npm run test:e2e
+
+# Test coverage
+npm run test:cov
 ```
 
 ## Deployment
 
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### Production Build
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+npm run build
+npm run start
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### Environment Variables for Production
+- Set `NODE_ENV=production`
+- Use strong `JWT_SECRET`
+- Configure production `MONGODB_URI`
+- Set appropriate `PORT`
 
-## Resources
+## Integration
 
-Check out a few resources that may come in handy when working with NestJS:
-
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+This backend integrates with:
+- **Frontend**: Provides REST API for the React dashboard
+- **Unity Plugin**: Receives emotion data via HTTP endpoints
+- **Model**: May receive processed emotion data from Python ML model
 
 ## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+For issues and questions:
+- Check the API documentation at `http://localhost:3000/api`
+- Review the NestJS documentation: https://docs.nestjs.com
+- Check the project's main README for overall architecture
+
+## License
+
+This project is part of the Emotion Tracker monorepo.
 
 ## Stay in touch
 
